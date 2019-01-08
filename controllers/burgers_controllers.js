@@ -8,8 +8,10 @@ var db = require("../models/");
 
 // Handle GET request
 router.get("/", function(req, res) {
-  db.Burger.all(function(data) {
-    var hbsObject = {burgers: data};
+  db.Burger.findAll({}).then(function(data) {
+    var hbsObject = {
+      burgers: data
+    };
     res.render("index", hbsObject);
   });
 });
