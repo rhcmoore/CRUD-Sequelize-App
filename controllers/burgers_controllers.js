@@ -29,11 +29,13 @@ router.post("/api/burgers", function(req, res) {
 
 // Handle PUT request
 router.put("/api/burgers/:id", function(req, res) {
-  var condition = `id = ${req.params.id}`;
-  db.Burger.update(
-    {devoured: req.body.devoured}, 
-    condition, 
-    function(result) {
+  db.Burger.update({
+      devoured: req.body.devoured
+    }, {
+      where: {
+        id: req.params.id
+      }
+    }).then(function(result) {
       if (result.changedRows == 0) {
         // If no rows were changed, then the ID must not exist, so 404
         return res.status(404).end();
@@ -41,6 +43,16 @@ router.put("/api/burgers/:id", function(req, res) {
         res.status(200).end();
       }
     });
+});
+
+Post.update({
+  updatedAt: null,
+}, {
+  where: {
+    deletedAt: {
+      [Op.ne]: null
+    }
+  }
 });
 
 // Handle DELETE request
