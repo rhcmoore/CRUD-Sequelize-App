@@ -18,13 +18,13 @@ router.get("/", function(req, res) {
 
 // Handle POST request
 router.post("/api/burgers", function(req, res) {
-  db.Burger.create(
-    ["burger_name", "devoured"], 
-    [req.body.burger_name, req.body.devoured], 
-    function(result) {
-      // Send back the ID of the new burger
-      res.json({ id: result.insertId });
-    });
+  db.Burger.create({
+    burger_name: req.body.burger_name,
+    devoured: req.body.devoured
+  }).then(function(result) {
+    // Send back the ID of the new burger
+    res.json({ id: result.insertId });
+  });
 });
 
 // Handle PUT request
