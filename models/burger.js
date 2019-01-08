@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
   var Burger = sequelize.define("Burger", {
-    name: {
+    burger_name: {
       type: DataTypes.STRING,
       validate: {
         len: [1]
