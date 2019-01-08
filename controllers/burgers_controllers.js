@@ -45,16 +45,6 @@ router.put("/api/burgers/:id", function(req, res) {
     });
 });
 
-Post.update({
-  updatedAt: null,
-}, {
-  where: {
-    deletedAt: {
-      [Op.ne]: null
-    }
-  }
-});
-
 // Handle DELETE request
 router.delete("/api/burgers/:id", function(req, res) {
   db.Burger.destroy({
